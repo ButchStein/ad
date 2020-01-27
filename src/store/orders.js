@@ -5,18 +5,11 @@ const url = 'http://134.209.138.34/'
 export default {
   state: {
     orders: [],
-    loading: false,
-    error: null
+    loading: false
   },
   mutations: {
     setLoading (state, payload) {
       state.loading = payload
-    },
-    setError (state, payload) {
-      state.error = payload
-    },
-    clearError (state) {
-      state.error = null
     },
     loadOrders (state, payload) {
       state.orders = payload
@@ -26,14 +19,7 @@ export default {
     setLoading ({ commit }, payload) {
       commit('setLoading', payload)
     },
-    setError ({ commit }, payload) {
-      commit('setError', payload)
-    },
-    clearError ({ commit }) {
-      commit('clearError')
-    },
     async fetchOrders ({ commit }) {
-      commit('clearError')
       commit('setLoading', true)
       const resOrders = []
       try {
@@ -45,17 +31,15 @@ export default {
         commit('loadOrders', resOrders)
         commit('setLoading', false)
       } catch (e) {
-        commit('setError', e.message)
         commit('setLoading', false)
         throw e
       }
     },
-    async loadOrderById ({ commit }) {
-      commit('clearError')
+    async loadOrderById ({ commit }, payload) {
       commit('setLoading', true)
       const resOrders = []
       try {
-        const orders = (await axios.get(`${url}item/`)).data
+        const orders = (await axios.get(`${url}item/${payload}`)).data
         Object.keys(orders).forEach(key => {
           const order = orders[key]
           resOrders.push(order)
@@ -63,7 +47,6 @@ export default {
         commit('loadOrders', resOrders)
         commit('setLoading', false)
       } catch (e) {
-        commit('setError', e.message)
         commit('setLoading', false)
         throw e
       }
@@ -73,16 +56,8 @@ export default {
     loading (state) {
       return state.loading
     },
-    error (state) {
-      return state.error
-    },
     orders (state) {
       return state.orders
-    },
-    orderById (state) {
-      return orderId => {
-        return state.orders.find(order => order.id === orderId)
-      }
     }
   }
 }

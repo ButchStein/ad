@@ -10,11 +10,11 @@
     </v-flex>
     <v-row v-else-if="!loading && orders.length !== 0">
       <v-col>
-        <h1 class="text--secondary mb-3">Orders</h1>
+        <h1 class="text--secondary mb-3">Все объявления</h1>
       </v-col>
     </v-row>
     <v-flex xs12 class="text-center" v-else>
-      <h1 class="text--secondary">You have no orders!</h1>
+      <h1 class="text--secondary">Нет доступных объявлений!</h1>
     </v-flex>
     <v-row justify="center">
       <v-col
@@ -24,17 +24,17 @@
       >
         <v-card
             class="mx-auto"
-            max-width="600"
+            width="600"
             raised
             link
-            :to="`order/${order.id}`"
+            :to="'order/' + order.id"
           >
             <v-list-item three-line>
               <v-list-item-content>
                 <div class="overline mb-4">{{order.id}}</div>
                 <v-list-item-title class="headline mb-1">{{ order.title}}</v-list-item-title>
                 <v-list-item-subtitle>{{order.address}}</v-list-item-subtitle>
-                <v-list-item-subtitle class="text--primary font-weight-bold">{{order.price}}</v-list-item-subtitle>
+                <v-list-item-subtitle class="text--primary font-weight-bold">{{ order.price }}</v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-avatar

@@ -26,7 +26,7 @@
       color="indigo"
       dark
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up" />
       <v-toolbar-title>Test Application</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
@@ -39,9 +39,9 @@
           <v-icon left>{{lin.icon}}</v-icon>{{lin.title}}</v-btn>
       </v-toolbar-items>
     </v-app-bar>
-    <v-content>
-     <router-view></router-view>
-    </v-content>
+      <v-content>
+        <router-view></router-view>
+      </v-content>
     <v-footer
       color="indigo"
       app
@@ -50,7 +50,6 @@
     </v-footer>
   </v-app>
 </template>
-
 <script>
 export default {
   name: 'App',
@@ -61,5 +60,4 @@ export default {
     ]
   })
 }
-
 </script>
